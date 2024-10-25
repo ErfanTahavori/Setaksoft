@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -7,19 +8,16 @@ namespace Models.Models
 
     public class JobApplication
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Title field must be completed!")]
         [MaxLength(50, ErrorMessage = "You cannot put more than 40 characters in the title field!")]
         public string Title { get; set; }
-        [Required]
-        public List<Tag> Tags { get; set; } = new List<Tag>();
 
 
-        //holds id
-        [NotMapped]
-        public List<int> SelectedTags { get; set; } = new List<int>();
-        //holds id
+
 
 
         public enum CooperationType
@@ -64,23 +62,39 @@ namespace Models.Models
         [Required]
         [DisplayName("Cooperation Type")]
         public CooperationType Cooperation_Type { get; set; }
+
+
         [Required]
         [DisplayName("Last Degree")]
         public LastDegree Last_Degree { get; set; }
 
+
         [Required]
         public CityEnum City { get; set; }
 
+
         [Required]
         public SexEnum Sex { get; set; }
+
+
         [Required]
         [DisplayName("Military Status")]
         public MilitaryStatus Military_Status { get; set; }
+
+        [Required]
         [DisplayName("Negotiated Salary")]
         public bool Negotiated_Salary { get; set; }
-        [DisplayName("Starting Salary")]
+
+
+        [Required(ErrorMessage = "Starting salary field must be completed")]
+        [DisplayName("Starting Salary($)")]
+        [Range(0, double.MaxValue, ErrorMessage = "Please enter a valid starting salary")]
         public double Start_Salary { get; set; }
-        [DisplayName("Ending Salary")]
+
+
+        [Required(ErrorMessage = "Ending salary field must be completed")]
+        [DisplayName("Ending Salary($)")]
+        [Range(0, double.MaxValue, ErrorMessage = "Please enter a valid ending salary")]
         public double End_Salary { get; set; }
 
 
@@ -89,11 +103,20 @@ namespace Models.Models
         [DisplayName("Work Experience (year)")]
         public double Work_Experience { get; set; }
 
+
         [Required(ErrorMessage = "Description field must be completed!")]
         [MaxLength(500, ErrorMessage = "You cannot put more than 500 characters in the description field!")]
         public string Description { get; set; }
 
-        public bool IsAccepted { get; set; }
+        [ValidateNever]
+        public bool IsAccepted { get; set; } = false;
+        [Required]
+        [Display(Name = "Tag")]
+        public int TagId { get; set; }
+        [ForeignKey("TagId")]
+        [ValidateNever]
+        public Tag Tag { get; set; }
+
     }
 }
 

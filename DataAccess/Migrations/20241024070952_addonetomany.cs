@@ -7,23 +7,55 @@
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class addtagdbset : Migration
+    public partial class addonetomany : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Tags",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tags", x => x.Id);
-                });
+
+
+            migrationBuilder.AddColumn<int>(
+                name: "TagId",
+                table: "JobApplications",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
+
+            migrationBuilder.UpdateData(
+                table: "JobApplications",
+                keyColumn: "Id",
+                keyValue: 1,
+                column: "TagId",
+                value: 1);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JobApplications_TagId",
+                table: "JobApplications",
+                column: "TagId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_JobApplications_Tags_TagId",
+                table: "JobApplications",
+                column: "TagId",
+                principalTable: "Tags",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropForeignKey(
+                name: "FK_JobApplications_Tags_TagId",
+                table: "JobApplications");
+
+            migrationBuilder.DropIndex(
+                name: "IX_JobApplications_TagId",
+                table: "JobApplications");
+
+            migrationBuilder.DropColumn(
+                name: "TagId",
+                table: "JobApplications");
 
             migrationBuilder.CreateTable(
                 name: "JobApplicationTags",
@@ -50,15 +82,6 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Tags",
-                columns: new[] { "Id", "Name" },
-                values: new object[,]
-                {
-                    { 1, "IT" },
-                    { 2, "Medical" }
-                });
-
-            migrationBuilder.InsertData(
                 table: "JobApplicationTags",
                 columns: new[] { "JobApplicationsId", "TagsId" },
                 values: new object[,]
@@ -71,16 +94,6 @@ namespace DataAccess.Migrations
                 name: "IX_JobApplicationTags_TagsId",
                 table: "JobApplicationTags",
                 column: "TagsId");
-        }
-
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "JobApplicationTags");
-
-            migrationBuilder.DropTable(
-                name: "Tags");
         }
     }
 }

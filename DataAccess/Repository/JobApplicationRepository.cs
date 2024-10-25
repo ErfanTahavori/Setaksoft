@@ -14,6 +14,7 @@ namespace DataAccess.Repository
         }
 
 
+
         public void Update(JobApplication obj)
         {
             _db.JobApplications.Update(obj);

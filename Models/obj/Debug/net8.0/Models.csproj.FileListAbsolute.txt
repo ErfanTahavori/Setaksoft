@@ -12,3 +12,4 @@ F:\OneDrive\Desktop\ASP.NET\c#\Asp .NET Projects\Setaksoft Project\Models\obj\De
 F:\OneDrive\Desktop\ASP.NET\c#\Asp .NET Projects\Setaksoft Project\Models\obj\Debug\net8.0\ref\Models.dll
 F:\OneDrive\Desktop\ASP.NET\c#\Asp .NET Projects\Setaksoft Project\Models\bin\Debug\net8.0\Models.runtimeconfig.json
 F:\OneDrive\Desktop\ASP.NET\c#\Asp .NET Projects\Setaksoft Project\Models\obj\Debug\net8.0\Models.genruntimeconfig.cache
+F:\OneDrive\Desktop\ASP.NET\c#\Asp .NET Projects\Setaksoft Project\Models\obj\Debug\net8.0\Models.sourcelink.json

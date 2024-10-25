@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Models.Models;
 
 namespace DataAccess.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
@@ -13,15 +12,46 @@ namespace DataAccess.Data
 
         public DbSet<JobApplication> JobApplications { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
             base.OnModelCreating(modelbuilder);
 
             modelbuilder.Entity<JobApplication>()
-           .HasMany(j => j.Tags)
-           .WithMany(t => t.JobApplications)
-           .UsingEntity(jt => jt.ToTable("JobApplicationTags"));
+            .HasOne(j => j.Tag)
+            .WithMany(t => t.JobApplications)
+            .HasForeignKey(j => j.TagId)
+            .OnDelete(DeleteBehavior.Cascade);
+            modelbuilder.Entity<ApplicationUser>()
+            .HasOne(u => u.Company)
+            .WithMany()
+            .HasForeignKey(u => u.CompanyId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            modelbuilder.Entity<Company>().HasData(
+                 new Company
+                 {
+                     Id = 1,
+                     Name = "Setak Soft",
+                     StreetAddress = "Abresan",
+                     City = "Tabriz City",
+                     PostalCode = "12345",
+
+                     PhoneNumber = "1112223333"
+                 },
+                new Company
+                {
+                    Id = 2,
+                    Name = "Digikala",
+                    StreetAddress = "Valiasr",
+                    City = "Tehran City",
+                    PostalCode = "13245",
+
+                    PhoneNumber = "1113335555"
+                }
+                );
 
             modelbuilder.Entity<JobApplication>().HasData(
                 new JobApplication
@@ -39,23 +69,15 @@ namespace DataAccess.Data
                     Work_Experience = 12,
                     Description = " we are searching for an asp.net developer  \n skills Required: c#, asp.net, sql server, Ef core, web api, Design Patterns, Clean Architecture \n Other benefits\r\nFixed salary\r\nProfessional training to improve skills (training is free)\r\nDynamic and friendly work environment\r\nThe possibility of career advancement and promotion in the company ",
                     IsAccepted = true,
+                    TagId = 1
                 }
                 );
             modelbuilder.Entity<Tag>().HasData(
                 new Tag { Id = 1, Name = "IT" },
                 new Tag { Id = 2, Name = "Medical" });
 
-            modelbuilder.Entity("JobApplicationTag").HasData(
-            new { JobApplicationsId = 1, TagsId = 1 },
-            new { JobApplicationsId = 1, TagsId = 2 }
-        );
-
 
         }
-
-
-
-
     }
 }
 

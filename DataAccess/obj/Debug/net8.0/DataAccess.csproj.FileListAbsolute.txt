@@ -15,3 +15,4 @@ F:\OneDrive\Desktop\ASP.NET\c#\Asp .NET Projects\Setaksoft Project\DataAccess\ob
 F:\OneDrive\Desktop\ASP.NET\c#\Asp .NET Projects\Setaksoft Project\DataAccess\obj\Debug\net8.0\ref\DataAccess.dll
 F:\OneDrive\Desktop\ASP.NET\c#\Asp .NET Projects\Setaksoft Project\DataAccess\bin\Debug\net8.0\DataAccess.runtimeconfig.json
 F:\OneDrive\Desktop\ASP.NET\c#\Asp .NET Projects\Setaksoft Project\DataAccess\obj\Debug\net8.0\DataAccess.genruntimeconfig.cache
+F:\OneDrive\Desktop\ASP.NET\c#\Asp .NET Projects\Setaksoft Project\DataAccess\obj\Debug\net8.0\DataAccess.sourcelink.json

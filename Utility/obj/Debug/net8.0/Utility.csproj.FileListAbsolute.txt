@@ -10,3 +10,4 @@ F:\OneDrive\Desktop\ASP.NET\c#\Asp .NET Projects\Setaksoft Project\Utility\obj\D
 F:\OneDrive\Desktop\ASP.NET\c#\Asp .NET Projects\Setaksoft Project\Utility\obj\Debug\net8.0\refint\Utility.dll
 F:\OneDrive\Desktop\ASP.NET\c#\Asp .NET Projects\Setaksoft Project\Utility\obj\Debug\net8.0\Utility.pdb
 F:\OneDrive\Desktop\ASP.NET\c#\Asp .NET Projects\Setaksoft Project\Utility\obj\Debug\net8.0\ref\Utility.dll
+F:\OneDrive\Desktop\ASP.NET\c#\Asp .NET Projects\Setaksoft Project\Utility\obj\Debug\net8.0\Utility.sourcelink.json

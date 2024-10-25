@@ -4,6 +4,8 @@
     {
         IJobApplicationRepository JobApplication { get; }
         ITagRepository Tag { get; }
+        ICompanyRepository Company { get; }
+        IApplicationUserRepository applicationUser { get; }
         void Save();
     }
 }
